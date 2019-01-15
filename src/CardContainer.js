@@ -20,8 +20,8 @@ class CardContainer extends React.Component {
     }
 }
 
-// todo change for export default
-export {CardContainer}
+
+export default CardContainer
 
 CardContainer.propTypes={
     color: PropTypes.oneOf(['green','yellow','red','blue']).isRequired,

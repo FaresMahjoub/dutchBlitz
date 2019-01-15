@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import {CardContainer} from './CardContainer.js';
+import CardContainer from './CardContainer.js';
 import PropTypes from 'prop-types';
 
 
@@ -10,7 +10,8 @@ const cardZoneStyle={
     display: "flex",
     flexWrap: "wrap",
 
-} // todo correct line spacing here
+}
+
 function CardZone({
     pileNumb,
     gridStyle,
@@ -36,4 +37,4 @@ CardZone.propTypes={
         pub: PropTypes.bool.isRequired,
 }
 // todo change for export default
-export {CardZone}
+export default CardZone

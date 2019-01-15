@@ -3,13 +3,14 @@ import { combineReducers } from 'redux'
 import {
     move,
     move3cards,
-    PlayPause,
-    setCards,
+    playpause,
+    setcards,
+    initialize
 } from './actions'
 
 
 const initialState={
-    cardsInMiddle: new Array(15).fill({color:'',pos: 'm', sex: '', numb:0, index:{this.index}}),
+    cardsInMiddle: new Array(16).fill({color:'',pos: 'm', sex: '', numb:0, index:this.index}),
     playing: true,
     player1Data:{
         nbCardsInMiddle: 0,
@@ -42,18 +43,17 @@ const initialState={
         remainingStack: new Array(27).fill({color:'',pos: 'rems', sex: '', numb:0}),    }
 }
 
-function initialise(){
+function initialiseR(){
     return initialState
 }
-function move(state=initialState, action){
+function moveR(state=initialState, action){
     let stateObj=JSON.parse(JSON.stringify(state))
-    if (action.type==move){
     switch (action.click1.pos){
         case 'b':
             switch (action.click2.pos){
                 case 'm':
                     stateObj.cardsInMiddle.splice(action.click2.index,1,{...action.click1, ...{index: action.click2.index}})
-                    stateObj.player3Data.nbCardsInMiddle=state.player3Data.nbCardsInMiddle+1,
+                    stateObj.player3Data.nbCardsInMiddle=state.player3Data.nbCardsInMiddle+1
                     break;
                 case 'ls':
                     stateObj.player3Data.leftSexiestStack.push(action.click1)
@@ -89,10 +89,10 @@ function move(state=initialState, action){
             stateObj.player3Data.remainingStack.pop()
         default:
             return stateObj
-            }}
+            }
 }
 
-function move3Cards(state=initialState, action){
+function move3CardsR(state=initialState, action){
     let stateObj=JSON.parse(JSON.stringify(state))
     let len=stateObj.player3Data.remainingStack
     let last=stateObj.player3Data.remainingStack[len-1]
@@ -105,7 +105,7 @@ function move3Cards(state=initialState, action){
     return stateObj
 }
 
-function setCards(state=initialState, action){
+function setCardsR(state=initialState, action){
     let deck=[{color:'b',pos: '', sex: 'm', numb:1},
               {color:'g',pos: '', sex: 'f', numb:1},
               {color:'y',pos: '', sex: 'f', numb:1},
@@ -141,3 +141,21 @@ function setCards(state=initialState, action){
     }
     stateObj.player3Data.remainingStack=Object.assign({},deck)
 }
+
+export function blitzReducer(state=initialState, action) {
+    switch (action.type) {
+        case move:
+            return moveR(state, action)
+            break;
+        case move3cards:
+            return move3CardsR(state, action)
+            break;
+        case initialize:
+            return initialiseR()
+            break;
+        case setcards:
+            return setCardsR(state, action)
+            break;
+    }
+}
+
