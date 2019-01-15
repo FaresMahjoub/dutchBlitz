@@ -4,16 +4,15 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import {CardZone} from './CardZone';
 
-function PlayerName(props){
-    return <div>{props.name}</div>
-}
-
-function NameZone(props){
+function NameZone({
+  name,
+  bot,
+}){
     return (<div style={{display: "flex"}}>
-                <p> {props.name} </p>
-                {props.bot &&  <button type="button"
-                                    /*onClick={}*/ > Change Opponent </button>
-    }
+                <p> {name} </p>
+                {bot &&  <button type="button"
+            /*onClick={}*/ > Change Opponent </button>
+        }
         </div>
 
     )
@@ -26,21 +25,24 @@ const playerZoneStyle={
 class PlayerZone extends React.Component{
     render(){
         return (
-            <div style={playerZoneStyle}>
-                <NameZone name={this.props.name}
-                          bot={this.props.bot}
-                          style={{
-                              gridRow: "1 / 2",
-                              gridColumn: "1 / 2",
-                          }}
-                          />
-                <CardZone
-                    pileNumb={4}
-                    style={{
-                        gridColumn: "1 / 2",
-                        gridRow: "2 / 3",
-                    }}/>
-            </div>  )
+            <div style={this.props.gridStyle}>
+                <div style={playerZoneStyle}>
+                    <NameZone name={this.props.name}
+                              bot={this.props.bot}
+                              style={{
+                                  gridRow: "1 / 2",
+                                  gridColumn: "1 / 2",
+                              }}
+                              />
+                    <CardZone
+                        pub={!this.props.bot}
+                        pileNumb={5}
+                        gridStyle={{
+                            gridColumn: "1 / 2",
+                            gridRow: "2 / 3",
+                        }}/>
+                </div>
+            </div>)
 
     }
 }

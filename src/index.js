@@ -8,45 +8,51 @@ import {CardZone} from './CardZone.js';
 
 const appStyle={
     display: "grid",
-    gridRow: "200px 600px 200px",
-    gridColumn:"100px 300px 300px",
+    gridTemplateRows: "1fr 3fr 1fr",
+    gridTemplateColumns:"1fr 3fr 3fr",
 }
 class App extends React.Component{
             render(){
                 return   (
                 <div style={appStyle}>
-                    <ButtonZone style={{
-                        gridColumn: "1 / 2",
-                        gridRow: "1 / span 3",
-                    }}
+                    <ButtonZone
+                        gridStyle={{
+                            gridColumnStart: "1",
+                            gridColumnEnd: "2",
+                            gridRowStart: "2",
+                            gridRowEnd: "4",
+                            alignSelf: "stretch"
+                        }}
                     />
                     <PlayerZone name="Thomas"
                                 bot={true}
-                                style={{
+                                gridStyle={{
                                     gridColumn:" 2 / 3",
                                     gridRow:" 1 / 2",
                                 }} />
                     <PlayerZone name="Guillaume"
                                 bot={true}
-                                style={{
+                                gridStyle={{
                                     gridColumn:" 3 / 4",
                                     gridRow:" 1 / 2",
                                 }} />
                     <CardZone pileNumb={20}
-                              style={{
-                                  gridColumn: "2 / span 2",
+                              pub={true}
+                              gridStyle={{
+                                  gridColumn: "2 / 4",
                                   gricRow: "2 / 3" ,
+                                  alignSelf: "center",
                               }}
                     />
                     <PlayerZone name="My Name"
                                 bot={false}
-                                style={{
+                                gridStyle={{
                                     gridColumn:" 2 / 3",
                                     gridRow:" 3 / 4",
                                 }} />
                     <PlayerZone name="JB"
                                 bot={true}
-                                style={{
+                                gridStyle={{
                                     gridColumn:" 3 / 4",
                                     gridRow:" 3 / 4",
                                 }} />
