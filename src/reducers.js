@@ -106,16 +106,16 @@ function move3CardsR(state=initialState, action){
 }
 
 function setCardsR(state=initialState, action){
-    let deck=[{color:'b',pos: '', sex: 'm', numb:1},
-              {color:'g',pos: '', sex: 'f', numb:1},
-              {color:'y',pos: '', sex: 'f', numb:1},
-              {color:'r',pos: '', sex: 'm', numb:1},
+    let deck=[{color:'blue',pos: '', sex: 'M', numb:1},
+              {color:'green',pos: '', sex: 'F', numb:1},
+              {color:'yellow',pos: '', sex: 'F', numb:1},
+              {color:'red',pos: '', sex: 'M', numb:1},
     ]
     for (let i=2;i<11;i++){
-        deck.push({color:'b', pos: '', sex: i%2===0 ? 'f':'m',numb: i});
-        deck.push({color:'g',pos: '', sex: i%2===0 ? 'm':'f', numb: i});
-        deck.push({color:'y',pos: '', sex: i%2===0 ? 'm':'f', numb:i});
-        deck.push({color:'r',pos: '', sex: i%2===0 ? 'f':'m', numb:i});
+        deck.push({color:'blue', pos: '', sex: i%2===0 ? 'F':'M',numb: i});
+        deck.push({color:'green',pos: '', sex: i%2===0 ? 'M':'F', numb: i});
+        deck.push({color:'yellow',pos: '', sex: i%2===0 ? 'M':'F', numb:i});
+        deck.push({color:'red',pos: '', sex: i%2===0 ? 'F':'M', numb:i});
     }
     const shuffle= a=>{
         var j, x, i;

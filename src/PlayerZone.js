@@ -12,15 +12,18 @@ const playerZoneStyle={
 };
 
 // todo stateless component?
-class PlayerZone extends React.Component{
-    render(){
-        // todo unpack this.props
+function PlayerZone(
+    gridStyle,
+    name,
+    bot,
+    upperCards,
+) {
         return (
-            <div style={this.props.gridStyle}>
+            <div style={gridStyle}>
                 <div style={playerZoneStyle}>
 					{/* todo correct indentation here */}
-					<NameZone name={this.props.name}
-                              bot={this.props.bot}
+					<NameZone name={name}
+                              bot={bot}
                               style={{
                                   gridRow: "1 / 2",
                                   gridColumn: "1 / 2",
@@ -29,6 +32,7 @@ class PlayerZone extends React.Component{
                     <CardZone
                         pub={!this.props.bot}
                         pileNumb={5}
+                        upperCards={upperCards}
                         gridStyle={{
                             gridColumn: "1 / 2",
                             gridRow: "2 / 3",
@@ -36,7 +40,7 @@ class PlayerZone extends React.Component{
                 </div>
             </div>)
 
-    }
+
 }
 
 PlayerZone.propTypes={

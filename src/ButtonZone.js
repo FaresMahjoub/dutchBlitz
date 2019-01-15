@@ -7,6 +7,8 @@ import PropTypes from 'prop-types';
 
 function ButtonZone({
    gridStyle,
+   onResetClick,
+   onGiveCardsClick,
 }){
     const buttonZoneStyle={
         display:"flex",
@@ -18,8 +20,8 @@ function ButtonZone({
         <div style={gridStyle}>
             <div style={buttonZoneStyle}>
                 {/* todo clean dead code */}
-                <button type="Button" /*onClick={}*/>Reset</button>
-                <button type="Button" /*onClick={}*/>Give cards</button>
+                <button type="Button" onClick={onResetClick}>Reset</button>
+                <button type="Button" onClick={onGiveCardsClick}>Give cards</button>
                 <button type="Button" /*onClick={}*/>Play/Pause</button>
             </div>
         </div>
