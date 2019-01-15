@@ -36,7 +36,7 @@ class App extends React.Component{
                                     gridColumn:" 3 / 4",
                                     gridRow:" 1 / 2",
                                 }} />
-                    <CardZone pileNumb={20}
+                    <CardZone pileNumb={16}
                               pub={true}
                               gridStyle={{
                                   gridColumn: "2 / 4",

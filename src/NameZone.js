@@ -7,7 +7,7 @@ export function NameZone({
     bot,
 }) {
     return (<div style={{display: "flex"}}>
-            <p> {name} </p>
+        {bot ? <p>{name}</p>: <textarea> My Name </textarea>}
             {bot && <button type="button"
                 /*onClick={}*/ > Change Opponent </button>
             }
@@ -17,6 +17,6 @@ export function NameZone({
 }
 
 NameZone.propTypes={
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     bot: PropTypes.bool.isRequired,
 }
