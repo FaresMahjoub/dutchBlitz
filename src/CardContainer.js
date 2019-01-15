@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 
 class CardContainer extends React.Component {
     render() {
+        // todo unpack props
         return (
+            // todo move this math operation to inside the method and put it in a variable
             <div style={{margin: `10px ${10 + 40 * Math.random()}px`}}>
                 <button  disabled={!this.props.pubPile} > {this.props.color} {this.props.sex} {this.props.numb} </button>
 
@@ -18,6 +20,7 @@ class CardContainer extends React.Component {
     }
 }
 
+// todo change for export default
 export {CardContainer}
 
 CardContainer.propTypes={

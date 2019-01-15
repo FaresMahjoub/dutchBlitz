@@ -10,7 +10,9 @@ const appStyle={
     display: "grid",
     gridTemplateRows: "1fr 2fr 1fr",
     gridTemplateColumns:"1fr 3fr 3fr",
-}
+};
+
+// todo stateless component?
 class App extends React.Component{
             render(){
                 return   (
@@ -24,18 +26,24 @@ class App extends React.Component{
                             alignSelf: "stretch"
                         }}
                     />
+
+                    {/* todo correct indentation here */}
                     <PlayerZone name="Thomas"
                                 bot={true}
                                 gridStyle={{
                                     gridColumn:" 2 / 3",
                                     gridRow:" 1 / 2",
                                 }} />
+
+                    {/* todo correct indentation here */}
                     <PlayerZone name="Guillaume"
                                 bot={true}
                                 gridStyle={{
                                     gridColumn:" 3 / 4",
                                     gridRow:" 1 / 2",
                                 }} />
+
+                    {/* todo correct indentation here */}
                     <CardZone pileNumb={20}
                               pub={true}
                               gridStyle={{
@@ -44,12 +52,16 @@ class App extends React.Component{
                                   alignSelf: "center",
                               }}
                     />
+
+                    {/* todo correct indentation here */}
                     <PlayerZone name="My Name"
                                 bot={false}
                                 gridStyle={{
                                     gridColumn:" 2 / 3",
                                     gridRow:" 3 / 4",
                                 }} />
+
+                    {/* todo correct indentation here */}
                     <PlayerZone name="JB"
                                 bot={true}
                                 gridStyle={{

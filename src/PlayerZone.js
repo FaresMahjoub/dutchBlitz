@@ -9,13 +9,17 @@ const playerZoneStyle={
     display: "grid",
     gridTemplateRown: "1fr 3fr",
     gridTemplateColumns: "1fr",
-}
+};
+
+// todo stateless component?
 class PlayerZone extends React.Component{
     render(){
+        // todo unpack this.props
         return (
             <div style={this.props.gridStyle}>
                 <div style={playerZoneStyle}>
-                    <NameZone name={this.props.name}
+					{/* todo correct indentation here */}
+					<NameZone name={this.props.name}
                               bot={this.props.bot}
                               style={{
                                   gridRow: "1 / 2",
@@ -40,5 +44,7 @@ PlayerZone.propTypes={
      name: PropTypes.string.isRequired,
      bot: PropTypes.bool.isRequired,
 
-}
+};
+
+// todo change for export default
 export {PlayerZone}
