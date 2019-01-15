@@ -5,6 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import {ButtonZone} from './ButtonZone.js';
 import {PlayerZone} from './PlayerZone.js';
 import {CardZone} from './CardZone.js';
+import BotsContainer from './botsContainer';
 
 // README README README README README README README README README README README README README README README README
 // I would've made 2 different components for the 'CardZone' (one for the PlayerZone and another for the common cards)
@@ -76,6 +77,7 @@ class App extends React.Component{
                                 }} />
 
 
+                    <BotsContainer />
                 </div>   )
             }
 }
