@@ -17,7 +17,10 @@ const cardZoneStyle={
     justifyContent: "space-evenly",
 }
 function CardZone(props){
-    const a=[0,0,0,0,0]
+    let a=[]
+    for (let i=0; i<props.pileNumb;i++){
+        a.push(0)
+    }
     const cards=
         <div >{a.map(elt => <CardContainer color="blue" sex="F" numb="9" />)}
         </div>

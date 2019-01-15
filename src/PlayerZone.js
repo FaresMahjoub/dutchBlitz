@@ -8,36 +8,36 @@ function PlayerName(props){
     return <div>{props.name}</div>
 }
 
+function NameZone(props){
+    return (<div style={{display: "flex"}}>
+                <p> {props.name} </p>
+                {props.bot &&  <button type="button"
+                                    /*onClick={}*/ > Change Opponent </button>
+    }
+        </div>
+
+    )
+}
 const playerZoneStyle={
     display: "grid",
-    gridTemplateColumns: "1fr 2fr",
-    gridTemplateRows: "1fr 3fr",
+    gridTemplateRown: "1fr 3fr",
+    gridTemplateColumns: "1fr",
 }
-
 class PlayerZone extends React.Component{
     render(){
         return (
             <div style={playerZoneStyle}>
-                <PlayerName
-                    name={this.props.name}
-                    style={{
-                        gridColumn: "1 / 2",
-                        gridRow: "1 / 2",
-                    }}
-                />
-                {this.props.bot &&
-                <button type="button"
-                    //onClick={}
-                        style={{
-                            gridColumn:"2 / 3",
-                            gridRow:"1 / 2",
-                        }}
-                > Change Opponent </button>
-                }
+                <NameZone name={this.props.name}
+                          bot={this.props.bot}
+                          style={{
+                              gridRow: "1 / 2",
+                              gridColumn: "1 / 2",
+                          }}
+                          />
                 <CardZone
                     pileNumb={4}
                     style={{
-                        gridColumn: "1 / 3",
+                        gridColumn: "1 / 2",
                         gridRow: "2 / 3",
                     }}/>
             </div>  )

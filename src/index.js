@@ -16,8 +16,8 @@ class App extends React.Component{
                 return   (
                 <div style={appStyle}>
                     <ButtonZone style={{
-                        gridColumn: "2 / 3",
-                        gridRow: "1 / span 2",
+                        gridColumn: "1 / 2",
+                        gridRow: "1 / span 3",
                     }}
                     />
                     <PlayerZone name="Thomas"
@@ -32,6 +32,12 @@ class App extends React.Component{
                                     gridColumn:" 3 / 4",
                                     gridRow:" 1 / 2",
                                 }} />
+                    <CardZone pileNumb={20}
+                              style={{
+                                  gridColumn: "2 / span 2",
+                                  gricRow: "2 / 3" ,
+                              }}
+                    />
                     <PlayerZone name="My Name"
                                 bot={false}
                                 style={{
@@ -44,12 +50,7 @@ class App extends React.Component{
                                     gridColumn:" 3 / 4",
                                     gridRow:" 3 / 4",
                                 }} />
-                    <CardZone pileNumb={12}
-                              style={{
-                                  gridColumn: "2 / span 2",
-                                  gricRow: "2 / 3" ,
-                }}
-                />
+
 
                 </div>   )
             }
