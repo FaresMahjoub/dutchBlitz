@@ -1,22 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
-import * as serviceWorker from './serviceWorker';
 import {CardZone} from './CardZone';
+import {NameZone} from "./NameZone";
+import PropTypes from 'prop-types';
 
-function NameZone({
-  name,
-  bot,
-}){
-    return (<div style={{display: "flex"}}>
-                <p> {name} </p>
-                {bot &&  <button type="button"
-            /*onClick={}*/ > Change Opponent </button>
-        }
-        </div>
 
-    )
-}
 const playerZoneStyle={
     display: "grid",
     gridTemplateRown: "1fr 3fr",
@@ -45,5 +33,12 @@ class PlayerZone extends React.Component{
             </div>)
 
     }
+}
+
+PlayerZone.propTypes={
+     gridStyle: PropTypes.object.isRequired,
+     name: PropTypes.string.isRequired,
+     bot: PropTypes.bool.isRequired,
+
 }
 export {PlayerZone}

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
+import PropTypes from 'prop-types';
 
 
 function ButtonZone({
@@ -24,6 +25,10 @@ function ButtonZone({
 
     )
 
+}
+
+ButtonZone.porpTypes={
+    gridStyle: PropTypes.object.isRequired,
 }
 
 export {ButtonZone}

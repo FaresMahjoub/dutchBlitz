@@ -8,7 +8,7 @@ import {CardZone} from './CardZone.js';
 
 const appStyle={
     display: "grid",
-    gridTemplateRows: "1fr 3fr 1fr",
+    gridTemplateRows: "1fr 2fr 1fr",
     gridTemplateColumns:"1fr 3fr 3fr",
 }
 class App extends React.Component{
