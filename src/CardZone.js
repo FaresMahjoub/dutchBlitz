@@ -10,13 +10,14 @@ const cardZoneStyle={
     display: "flex",
     flexWrap: "wrap",
 
-}
+} // todo correct line spacing here
 function CardZone({
     pileNumb,
     gridStyle,
     pub,
 }){
     let a=[]
+    // todo use Array(number).fill(0) - check this in the console (in chrome)
     for (let i=0; i<pileNumb;i++){
         a.push(0)
     }
@@ -34,4 +35,5 @@ CardZone.propTypes={
         gridStyle: PropTypes.object.isRequired,
         pub: PropTypes.bool.isRequired,
 }
+// todo change for export default
 export {CardZone}
