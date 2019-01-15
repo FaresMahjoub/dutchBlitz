@@ -6,6 +6,12 @@ import {ButtonZone} from './ButtonZone.js';
 import {PlayerZone} from './PlayerZone.js';
 import {CardZone} from './CardZone.js';
 
+// README README README README README README README README README README README README README README README README
+// I would've made 2 different components for the 'CardZone' (one for the PlayerZone and another for the common cards)
+// I would've called the part in the middle of CommonZone
+// I would've called the card container rather 'Pile' (PileContainer...), because it seems that there is only 1 card.
+// README README README README README README README README README README README README README README README README
+
 const appStyle={
     display: "grid",
     gridTemplateRows: "1fr 2fr 1fr",
