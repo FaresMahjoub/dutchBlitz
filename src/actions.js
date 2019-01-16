@@ -1,8 +1,9 @@
 
 export const move= "card_move"
 export const move3cards= "move_3_cards"
-export const PlayPause= "PlayPause"
-export const setCards= "setCards"
+export const playPause= "PlayPause"
+export const setcards= "setCards"
+export const initialize="initialize"
 
 
 export function CardMove(click1, click2){
@@ -15,14 +16,18 @@ export function CardMove(click1, click2){
     }
 }
 
+export function Initialise(){
+    return {type: initialize}
+}
+
 export function Move3Cards(){
-    return {type: move3Cards}
+    return {type: move3cards}
 }
 
 export function SetCards(){
-    return {type: setCards}
+    return {type: setcards}
 }
 
 export function PlayPause(){
-    return {type: PlayPause}
+    return {type: playPause}
 }

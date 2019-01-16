@@ -5,10 +5,12 @@ import * as serviceWorker from './serviceWorker';
 import {CardZone} from './CardZone.js';
 
 
-class BoardZone extends React.Component{
-    render(){
+function BoardZone (
+    pileNumb,
+
+){
         return  <CardZone pileNumb={10}/>
-            }
+
 }
 
 

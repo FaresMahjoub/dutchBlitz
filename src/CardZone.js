@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import {CardContainer} from './CardContainer.js';
+import CardContainer from './CardContainer.js';
 import PropTypes from 'prop-types';
 
 
@@ -10,21 +10,22 @@ const cardZoneStyle={
     display: "flex",
     flexWrap: "wrap",
 
-} // todo correct line spacing here
+}
+
 function CardZone({
     pileNumb,
     gridStyle,
     pub,
+    upperCards,
 }){
-    let a=[]
-    // todo use Array(number).fill(0) - check this in the console (in chrome)
-    for (let i=0; i<pileNumb;i++){
-        a.push(0)
-    }
     const cards=
         <div style={gridStyle}>
             <div style={cardZoneStyle} >
-                {a.map(elt => <CardContainer pubPile={pub} color="blue" sex="F" numb={9} />)}
+                <CardContainer pubPile={pub} color={upperCards[0].color} sex={upperCards[0].sex} numb={upperCards[0].numb} />)
+                <CardContainer pubPile={pub} color={upperCards[1].color} sex={upperCards[1].sex} numb={upperCards[1].numb} />)
+                <CardContainer pubPile={pub} color={upperCards[2].color} sex={upperCards[2].sex} numb={upperCards[2].numb} />)
+                <CardContainer pubPile={pub} color={upperCards[3].color} sex={upperCards[3].sex} numb={upperCards[3].numb} />)
+                <CardContainer pubPile={pub} color={upperCards[4].color} sex={upperCards[4].sex} numb={upperCards[4].numb} />)
             </div>
         </div>
     return cards
@@ -36,4 +37,4 @@ CardZone.propTypes={
         pub: PropTypes.bool.isRequired,
 }
 // todo change for export default
-export {CardZone}
+export default CardZone
