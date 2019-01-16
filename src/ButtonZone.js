@@ -19,7 +19,6 @@ function ButtonZone({
     return(
         <div style={gridStyle}>
             <div style={buttonZoneStyle}>
-                {/* todo clean dead code */}
                 <button type="Button" onClick={onResetClick}>Reset</button>
                 <button type="Button" onClick={onGiveCardsClick}>Give cards</button>
                 <button type="Button" /*onClick={}*/>Play/Pause</button>
@@ -34,5 +33,4 @@ ButtonZone.porpTypes={
     gridStyle: PropTypes.object.isRequired,
 }
 
-// todo change for export default
 export default ButtonZone

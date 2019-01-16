@@ -9,9 +9,9 @@ function CardContainer({
     sex,
     numb,
 }) {
+       const verticalMargin=10 + 40 * Math.random()
         return (
-            // todo move this math operation to inside the method and put it in a variable
-            <div style={{margin: `10px ${10 + 40 * Math.random()}px`}}>
+            <div style={{margin: `10px ${verticalMargin}px`}}>
                 <button  /* onClick= onMoveClick*/ disabled={!pubPile} > {color} {sex} {numb} </button>
             </div>
         )

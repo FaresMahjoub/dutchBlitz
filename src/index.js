@@ -5,6 +5,9 @@ import * as serviceWorker from './serviceWorker';
 import ButtonZone from './ButtonZone.js';
 import PlayerZone from './PlayerZone.js';
 import BoardZone from './BoardZone.js'
+import { Provider } from 'react-redux'
+import App2 from './App2.js'
+import store from "./store";
 
 // README README README README README README README README README README README README README README README README
 // I would've made 2 different components for the 'CardZone' (one for the PlayerZone and another for the common cards)
@@ -82,7 +85,11 @@ class App extends React.Component{
             }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <Provider store={store}>
+     <App2 />,
+    </Provider>,
+    document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

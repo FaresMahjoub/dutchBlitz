@@ -1,38 +1,36 @@
 
-// todo the notation for constants usually is CAPITALIZED_WITH_WORDS_SEPARATED_BY_UNDERSCORES
-export const move= "card_move"
-export const move3cards= "move_3_cards"
-export const playPause= "PlayPause"
-export const setcards= "setCards"
-export const initialize="initialize"
+export const MOVE= "card_move"
+export const MOVE_3_CARDS= "move_3_cards"
+export const PLAY_PAUSE= "playPause"
+export const SET_CARDS= "setCards"
+export const INITIALIZE="initialise"
+export const CLICK="click"
 
-// todo change name notation to camelCase
-export function CardMove(click1, click2){
+export function cardMove(click1, click2){
     if ((click2.props.color === click1.props.color && click2.props.numb === click1.props.numb-1)
         || (click1.props.numb===1 && click2.props.numb==0)
         || (click2.props.sex  !== click1.props.sex && click2.props.numb===click1.props.numb-1)){
-           return {type: move, click1, click2}
+           return {type: MOVE, click1, click2}
     } else{
         return {}
     }
 }
-
-// todo change name notation to camelCase
-export function Initialise(){
-    return {type: initialize}
+export function cardClick(click1){
+    return({type: CLICK, click1})
 }
 
-// todo change name notation to camelCase
-export function Move3Cards(){
-    return {type: move3cards}
+export function initialise(){
+    return ({type: INITIALIZE})
 }
 
-// todo change name notation to camelCase
-export function SetCards(){
-    return {type: setcards}
+export function move3Cards(){
+    return ({type: MOVE_3_CARDS})
 }
 
-// todo change name notation to camelCase
-export function PlayPause(){
-    return {type: playPause}
+export function setCards(){
+    return ({type: SET_CARDS})
+}
+
+export function playPause(){
+    return ({type: PLAY_PAUSE})
 }

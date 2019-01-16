@@ -16,7 +16,8 @@ function CardZone({
     gridStyle,
     pub,
     upperCards,
-}){
+}){ console.log("in cardzone")
+    console.log(upperCards);
     return (
         <div style={gridStyle}>
             <div style={cardZoneStyle} >
@@ -44,5 +45,4 @@ CardZone.propTypes={
         gridStyle: PropTypes.object.isRequired,
         pub: PropTypes.bool.isRequired,
 }
-// todo change for export default
 export default CardZone
