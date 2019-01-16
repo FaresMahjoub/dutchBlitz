@@ -14,13 +14,14 @@ for (let i=0;i<cardsInMiddle.length;i++){
 }
 const initialState={
     cardsInMiddle: cardsInMiddle,
-    playing: true,
+    playing: false,
     player1Data:{
         nbCardsInMiddle: 0,
         blitzStack: new Array(10).fill({color:'',pos: 'b', sex: '', numb:0}),
         leftSexiestStack: new Array(1).fill({color:'',pos: 'ls', sex: '', numb:0}),
         middleSexistStack: new Array(1).fill({color:'',pos: 'ms', sex: '', numb:0}),
         rightSexistStack: new Array(1).fill({color:'',pos: 'rs', sex: '', numb:0}),
+		// todo discuss this  --  perhaps it would be cleaner if the logic had an extra pile, to keep the cards in the hand, which are transfered to this one when you 'move3cards'
         remainingStack: new Array(27).fill({color:'',pos: 'rems', sex: '', numb:0}),
     },
     player2Data:{
@@ -32,13 +33,13 @@ const initialState={
         remainingStack: new Array(27).fill({color:'',pos: 'rems', sex: '', numb:0}),    },
     player3Data:{
         clicked:false,
-        lastClicked:{color:'',pos: '', sex: '', numb:0, index:0}
+        lastClicked:{color:'',pos: '', sex: '', numb:0, index:0},
         nbCardsInMiddle: 0,
         blitzStack: new Array(10).fill({color:'',pos: 'b', sex: '', numb:0}),
         leftSexiestStack: new Array(1).fill({color:'',pos: 'ls', sex: '', numb:0}),
         middleSexistStack: new Array(1).fill({color:'',pos: 'ms', sex: '', numb:0}),
         rightSexistStack: new Array(1).fill({color:'',pos: 'rs', sex: '', numb:0}),
-        remainingStack: new Array(27).fill({color:'',pos: 'rems', sex: '', numb:0}),    } ,
+		remainingStack: new Array(27).fill({color:'',pos: 'rems', sex: '', numb:0}),    } ,
     player4Data:{
         nbCardsInMiddle: 0,
         blitzStack: new Array(10).fill({color:'',pos: 'b', sex: '', numb:0}),
@@ -48,15 +49,18 @@ const initialState={
         remainingStack: new Array(27).fill({color:'',pos: 'rems', sex: '', numb:0}),    }
 }
 
+// todo what is this useful for? couldn't you just get the object directly?
 function initialiseR(){
     return initialState
 }
+
 function moveR(state=initialState, action){
     let stateObj=JSON.parse(JSON.stringify(state))
     switch (action.click1.pos){
         case 'b':
             switch (action.click2.pos){
                 case 'm':
+                	// todo add a comment to explain this line (it avoids the reader of re-thinking of the index logic just to understand this)
                     stateObj.cardsInMiddle.splice(action.click2.index,1,{...action.click1, ...{index: action.click2.index}})
                     stateObj.player3Data.nbCardsInMiddle=state.player3Data.nbCardsInMiddle+1
                     stateObj.player3Data.blitzStack.pop()
@@ -76,22 +80,26 @@ function moveR(state=initialState, action){
             }
              break;
         case 'ls':
-            stateObj.cardsInMiddle.splice(action.click2.index,1,{...action.click1, ...{index: action.click2.index}})
+			// todo add a comment to explain this line (it avoids the reader of re-thinking of the index logic just to understand this)
+			stateObj.cardsInMiddle.splice(action.click2.index,1,{...action.click1, ...{index: action.click2.index}})
             stateObj.player3Data.nbCardsInMiddle=state.player3Data.nbCardsInMiddle+1
             stateObj.player3Data.leftSexiestStack.pop()
             break;
         case 'ms':
-            stateObj.cardsInMiddle.splice(action.click2.index,1,{...action.click1, ...{index: action.click2.index}})
+			// todo add a comment to explain this line (it avoids the reader of re-thinking of the index logic just to understand this)
+			stateObj.cardsInMiddle.splice(action.click2.index,1,{...action.click1, ...{index: action.click2.index}})
             stateObj.player3Data.nbCardsInMiddle=state.player3Data.nbCardsInMiddle+1
             stateObj.player3Data.middleSexiestStack.pop()
             break;
         case 'rs':
-            stateObj.cardsInMiddle.splice(action.click2.index,1,{...action.click1, ...{index: action.click2.index}})
+			// todo add a comment to explain this line (it avoids the reader of re-thinking of the index logic just to understand this)
+			stateObj.cardsInMiddle.splice(action.click2.index,1,{...action.click1, ...{index: action.click2.index}})
             stateObj.player3Data.nbCardsInMiddle=state.player3Data.nbCardsInMiddle+1
             stateObj.player3Data.rightSexiestStack.pop()
             break;
         case 'rems':
-            stateObj.cardsInMiddle.splice(action.click2.index,1,{...action.click1, ...{index: action.click2.index}})
+			// todo add a comment to explain this line (it avoids the reader of re-thinking of the index logic just to understand this)
+			stateObj.cardsInMiddle.splice(action.click2.index,1,{...action.click1, ...{index: action.click2.index}})
             stateObj.player3Data.nbCardsInMiddle=state.player3Data.nbCardsInMiddle+1
             stateObj.player3Data.remainingStack.pop()
             break;
@@ -104,11 +112,13 @@ function move3CardsR(state=initialState, action){
     let len=stateObj.player3Data.remainingStack
     let last=stateObj.player3Data.remainingStack[len-1]
     let prelast=stateObj.player3Data.remainingStack[len-2]
+    let beforePrelast=stateObj.player3Data.remainingStack[len-3]
     for (let i=len-1;i>=0;i--){
-        stateObj.player3Data.remainingStack[i]=stateObj.player3Data.remainingStack[i-2]
+        stateObj.player3Data.remainingStack[i]=stateObj.player3Data.remainingStack[i-3]
     }
-    stateObj.player3Data.remainingStack[0]=prelast
-    stateObj.player3Data.remainingStack[0]=last
+    stateObj.player3Data.remainingStack[0]=beforePrelast
+    stateObj.player3Data.remainingStack[1]=prelast
+    stateObj.player3Data.remainingStack[2]=last
     return stateObj
 }
 
@@ -124,10 +134,13 @@ function setCardsR(state=initialState, action){
         deck.push({color:'yellow',pos: '', sex: i%2===0 ? 'M':'F', numb:i});
         deck.push({color:'red',pos: '', sex: i%2===0 ? 'F':'M', numb:i});
     }
+
+    // todo use more meaningful names
     const shuffle= a=>{
         var j, x, i;
         for (i = a.length - 1; i > 0; i--) {
-            j = Math.floor(Math.random() * (i + 1));
+            j = Math.floor(Math.random() * (i + 1));  // todo find a better function, there are many available which would be easier to understand
+            // todo add comment
             x = a[i];
             a[i] = a[j];
             a[j] = x;
@@ -136,6 +149,8 @@ function setCardsR(state=initialState, action){
     }
     deck=shuffle(deck)
     let stateObj=JSON.parse(JSON.stringify(state))
+
+    // todo discuss -- couldn't you just slice the deck?
     stateObj.player3Data.leftSexiestStack[0]=deck[deck.len()-1]
     deck.pop()
     stateObj.player3Data.middleSexiestStack[0]=deck[deck.len()-1]
