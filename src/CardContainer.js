@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 
 
 
-function CardContainer(
+function CardContainer({
     pubPile,
     color,
     sex,
     numb,
-) {
+}) {
         return (
             // todo move this math operation to inside the method and put it in a variable
             <div style={{margin: `10px ${10 + 40 * Math.random()}px`}}>
-                <button  disabled={!pubPile} > {color} {sex} {numb} </button>
+                <button  /* onClick= onMoveClick*/ disabled={!pubPile} > {color} {sex} {numb} </button>
             </div>
         )
 }

@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import {ButtonZone} from './ButtonZone.js';
-import {PlayerZone} from './PlayerZone.js';
-import {CardZone} from './CardZone.js';
+import ButtonZone from './ButtonZone.js';
+import PlayerZone from './PlayerZone.js';
+import BoardZone from './BoardZone.js'
 
 // README README README README README README README README README README README README README README README README
 // I would've made 2 different components for the 'CardZone' (one for the PlayerZone and another for the common cards)
@@ -17,7 +17,8 @@ const appStyle={
     gridTemplateRows: "1fr 2fr 1fr",
     gridTemplateColumns:"1fr 3fr 3fr",
 };
-
+const midCards= Array(16).fill({color: 'blue', sex:'F', numb:0,})
+const playerCards =  Array(5).fill({color: 'blue', sex:'F', numb:0,})
 class App extends React.Component{
             render(){
                 return   (
@@ -33,6 +34,7 @@ class App extends React.Component{
                     />
                     <PlayerZone
                          name="Thomas"
+                         upperPlayerCards={playerCards}
                          bot={true}
                          gridStyle={{
                              gridColumn:" 2 / 3",
@@ -41,15 +43,17 @@ class App extends React.Component{
                     />
                     <PlayerZone
                          name="Guillaume"
+                         upperPlayerCards={playerCards}
                          bot={true}
                          gridStyle={{
                               gridColumn:" 3 / 4",
                               gridRow:" 1 / 2",
                          }}
                     />
-                    <CardZone
-                        pileNumb={20}
+                    <BoardZone
+                        pileNumb={16}
                         pub={true}
+                        upperCards={midCards}
                         gridStyle={{
                             gridColumn: "2 / 4",
                             gricRow: "2 / 3" ,
@@ -58,6 +62,7 @@ class App extends React.Component{
                     />
                     <PlayerZone
                         name="My Name"
+                        upperPlayerCards={playerCards}
                         bot={false}
                         gridStyle={{
                             gridColumn:" 2 / 3",
@@ -66,6 +71,7 @@ class App extends React.Component{
                     />
                     <PlayerZone
                         name="JB"
+                        upperPlayerCards={playerCards}
                         bot={true}
                         gridStyle={{
                             gridColumn:" 3 / 4",

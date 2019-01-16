@@ -8,9 +8,12 @@ import {
     initialize
 } from './actions'
 
-
+const cardsInMiddle = Array(16).fill({color:'',pos: 'm', sex: '', numb:0 });
+for (let i=0;i<cardsInMiddle.length;i++){
+    Object.assign(cardsInMiddle[i],{index: i,})
+}
 const initialState={
-    cardsInMiddle: new Array(16).fill({color:'',pos: 'm', sex: '', numb:0, index:this.index}),
+    cardsInMiddle: cardsInMiddle,
     playing: true,
     player1Data:{
         nbCardsInMiddle: 0,
@@ -28,6 +31,8 @@ const initialState={
         rightSexistStack: new Array(1).fill({color:'',pos: 'rs', sex: '', numb:0}),
         remainingStack: new Array(27).fill({color:'',pos: 'rems', sex: '', numb:0}),    },
     player3Data:{
+        clicked:false,
+        lastClicked:{color:'',pos: '', sex: '', numb:0, index:0}
         nbCardsInMiddle: 0,
         blitzStack: new Array(10).fill({color:'',pos: 'b', sex: '', numb:0}),
         leftSexiestStack: new Array(1).fill({color:'',pos: 'ls', sex: '', numb:0}),
@@ -54,18 +59,20 @@ function moveR(state=initialState, action){
                 case 'm':
                     stateObj.cardsInMiddle.splice(action.click2.index,1,{...action.click1, ...{index: action.click2.index}})
                     stateObj.player3Data.nbCardsInMiddle=state.player3Data.nbCardsInMiddle+1
+                    stateObj.player3Data.blitzStack.pop()
                     break;
                 case 'ls':
                     stateObj.player3Data.leftSexiestStack.push(action.click1)
+                    stateObj.player3Data.blitzStack.pop()
                     break;
                 case 'ms':
                     stateObj.player3Data.middleSexiestStack.push(action.click1)
+                    stateObj.player3Data.blitzStack.pop()
                     break;
                 case 'rs':
                     stateObj.player3Data.rightSexiestStack.push(action.click1)
-                    break;
-                default:
                     stateObj.player3Data.blitzStack.pop()
+                    break;
             }
              break;
         case 'ls':
@@ -87,8 +94,8 @@ function moveR(state=initialState, action){
             stateObj.cardsInMiddle.splice(action.click2.index,1,{...action.click1, ...{index: action.click2.index}})
             stateObj.player3Data.nbCardsInMiddle=state.player3Data.nbCardsInMiddle+1
             stateObj.player3Data.remainingStack.pop()
-        default:
-            return stateObj
+            break;
+    return stateObj
             }
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
-import {CardZone} from './CardZone';
-import {NameZone} from "./NameZone";
+import CardZone from './CardZone';
+import NameZone from "./NameZone";
 import PropTypes from 'prop-types';
 
 
@@ -11,13 +11,13 @@ const playerZoneStyle={
     gridTemplateColumns: "1fr",
 };
 
-// todo stateless component?
-function PlayerZone(
+
+function PlayerZone({
     gridStyle,
     name,
     bot,
-    upperCards,
-) {
+    upperPlayerCards,
+}) {
         return (
             <div style={gridStyle}>
                 <div style={playerZoneStyle}>
@@ -30,13 +30,14 @@ function PlayerZone(
                               }}
                               />
                     <CardZone
-                        pub={!this.props.bot}
+                        pub={!bot}
                         pileNumb={5}
-                        upperCards={upperCards}
+                        upperCards={upperPlayerCards}
                         gridStyle={{
                             gridColumn: "1 / 2",
                             gridRow: "2 / 3",
-                        }}/>
+                        }}
+                    />
                 </div>
             </div>)
 
@@ -50,5 +51,4 @@ PlayerZone.propTypes={
 
 };
 
-// todo change for export default
-export {PlayerZone}
+export default PlayerZone

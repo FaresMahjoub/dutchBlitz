@@ -35,4 +35,4 @@ ButtonZone.porpTypes={
 }
 
 // todo change for export default
-export {ButtonZone}
+export default ButtonZone
