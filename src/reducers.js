@@ -7,11 +7,25 @@ import {
     INITIALIZE,
     CLICK,
 } from './actions'
+import {cardMove} from './actions'
 
-const cardsInMiddle = Array(16).fill({color:'',pos: 'm', sex: '', numb:0 });
-for (let i=0;i<cardsInMiddle.length;i++){
-    Object.assign(cardsInMiddle[i],{index: i,})
-}
+const cardsInMiddle = Array(16).fill({color:'',pos: 'm', sex: '', numb:0, index:0 });
+cardsInMiddle[1].index=1
+cardsInMiddle[2].index=2
+cardsInMiddle[3].index=3
+cardsInMiddle[4].index=4
+cardsInMiddle[5].index=5
+cardsInMiddle[6].index=6
+cardsInMiddle[7].index=7
+cardsInMiddle[8].index=8
+cardsInMiddle[9].index=9
+cardsInMiddle[10].index=10
+cardsInMiddle[11].index=11
+cardsInMiddle[12].index=12
+cardsInMiddle[13].index=13
+
+console.log("total");
+console.log(cardsInMiddle);
 export const initialState={
     cardsInMiddle: cardsInMiddle,
     playing: false,
@@ -52,40 +66,61 @@ export const initialState={
 function initialiseR(){
     return initialState
 }
-/*function clickedR(state=initialState, action){
-    let stateObj=JSON.parse(JSON.stringify(state))
+
+function clickedR(state=initialState, action){
+    console.log(state);
+    let stateObj=JSON.parse(JSON.stringify(state));
+    console.log(stateObj);
     if (stateObj.player3Data.clicked===false){
-        stateObj.player3Data.clicked=true
-        stateObj.player3Data.lastClicked=action.click1
+        stateObj.player3Data.clicked=true;
+        stateObj.player3Data.lastClicked=action.click1;
+        return stateObj
     }
     else{
-        let click1=stateObj.player3Data.clicked
-        state
+        let click2=action.click1;
+        let click1=stateObj.player3Data.lastClicked;
+        console.log("click1");
+        console.log(click1);
+        console.log("click2");
+        console.log(click2);
+        stateObj=moveR(stateObj,click1,click2);
+        stateObj.player3Data.lastClicked=click2;
+        stateObj.player3Data.clicked=false;
+        console.log(stateObj);
+        return stateObj
     }
-}*/
+}
 
-function moveR(state=initialState, action){
-    let stateObj=JSON.parse(JSON.stringify(state))
-    switch (action.click1.pos){
+function moveR(state=initialState, click1,click2){
+    console.log(state);
+    let stateObj=JSON.parse(JSON.stringify(state));
+    console.log("action.click1");
+    console.log(click1);
+    if ((click2.color === click1.color && click2.numb === click1.numb-1)
+        || (click1.numb===1 && click2.numb==0)
+        || (click2.sex  !== click1.sex && click2.numb===click1.numb-1)
+        || (click1.pos===click2.pos && click1.pos==='rem')){
+        console.log("ok pour if");
+    switch (click1.pos){
         case 'b':
-            switch (action.click2.pos){
+            switch (click2.pos){
                 case 'm':
                 	// the cards in cardInMiddle are only the top of the pile. The index prop is the number of the pile on the board
                     // (specific for the piles in the middle) thus needs to be added to cards coming to the middle
-                    stateObj.cardsInMiddle.splice(action.click2.index,1,{...action.click1, ...{index: action.click2.index}})
+                    stateObj.cardsInMiddle.splice(click2.index,1,{...click1, ...{index: click2.index}})
                     stateObj.player3Data.nbCardsInMiddle=state.player3Data.nbCardsInMiddle+1
                     stateObj.player3Data.blitzStack.pop()
                     break;
                 case 'ls':
-                    stateObj.player3Data.leftSexistStack.push(action.click1)
+                    stateObj.player3Data.leftSexistStack.push(click1)
                     stateObj.player3Data.blitzStack.pop()
                     break;
                 case 'ms':
-                    stateObj.player3Data.middleSexistStack.push(action.click1)
+                    stateObj.player3Data.middleSexistStack.push(click1)
                     stateObj.player3Data.blitzStack.pop()
                     break;
                 case 'rs':
-                    stateObj.player3Data.rightSexistStack.push(action.click1)
+                    stateObj.player3Data.rightSexistStack.push(click1)
                     stateObj.player3Data.blitzStack.pop()
                     break;
             }
@@ -93,35 +128,38 @@ function moveR(state=initialState, action){
         case 'ls':
             // card coming to the middle. The cards in cardInMiddle are only the top of the pile. The index prop is the number of the pile on the board
             // (specific for tthe piles in the middle) thus needs to be added to cards coming to the middle
-			stateObj.cardsInMiddle.splice(action.click2.index,1,{...action.click1, ...{index: action.click2.index}})
+			stateObj.cardsInMiddle.splice(click2.index,1,{...click1, ...{index: click2.index}})
             stateObj.player3Data.nbCardsInMiddle=state.player3Data.nbCardsInMiddle+1
             stateObj.player3Data.leftSexistStack.pop()
+            stateObj.player3Data.leftSexistStack.push({color:'',pos: 'ls', sex: '', numb:0})
             break;
         case 'ms':
             // card coming to the middle. The cards in cardInMiddle are only the top of the pile. The index prop is the number of the pile on the board
             // (specific for the piles in the middle) thus needs to be added to cards coming to the middle
-			stateObj.cardsInMiddle.splice(action.click2.index,1,{...action.click1, ...{index: action.click2.index}})
+			stateObj.cardsInMiddle.splice(click2.index,1,{...click1, ...{index: click2.index}})
             stateObj.player3Data.nbCardsInMiddle=state.player3Data.nbCardsInMiddle+1
             stateObj.player3Data.middleSexistStack.pop()
+            stateObj.player3Data.middleSexistStack.push({color:'',pos: 'ms', sex: '', numb:0})
             break;
         case 'rs':
             // card coming to the middle. The cards in cardInMiddle are only the top of the pile. The index prop is the number of the pile on the board
             // (specific for the piles in the middle) thus needs to be added to cards coming to the middle
-			stateObj.cardsInMiddle.splice(action.click2.index,1,{...action.click1, ...{index: action.click2.index}})
+			stateObj.cardsInMiddle.splice(click2.index,1,{...click1, ...{index: click2.index}})
             stateObj.player3Data.nbCardsInMiddle=state.player3Data.nbCardsInMiddle+1
             stateObj.player3Data.rightSexistStack.pop()
+            stateObj.player3Data.rightSexistStack.push({color:'',pos: 'rs', sex: '', numb:0})
             break;
-        case 'rems':
-            switch (action.click2.pos){
+        case 'rem':
+            switch (click2.pos){
                 case 'm':
                     // card coming to the middle. The cards in cardInMiddle are only the top of the pile. The index prop is the number of the pile on the board
                     // (specific for the piles in the middle) thus needs to be added to cards coming to the middle
-                    stateObj.cardsInMiddle.splice(action.click2.index,1,{...action.click1, ...{index: action.click2.index}})
+                    stateObj.cardsInMiddle.splice(click2.index,1,{...click1, ...{index: click2.index}})
                     stateObj.player3Data.nbCardsInMiddle=state.player3Data.nbCardsInMiddle+1
                     stateObj.player3Data.remainingStack.pop()
                     break;
-                case 'rems':
-                    let len=stateObj.player3Data.remainingStack
+                case 'rem':
+                    let len=stateObj.player3Data.remainingStack.length
                     let last=stateObj.player3Data.remainingStack[len-1]
                     let prelast=stateObj.player3Data.remainingStack[len-2]
                     let beforePrelast=stateObj.player3Data.remainingStack[len-3]
@@ -131,8 +169,9 @@ function moveR(state=initialState, action){
                     stateObj.player3Data.remainingStack[0]=beforePrelast
                     stateObj.player3Data.remainingStack[1]=prelast
                     stateObj.player3Data.remainingStack[2]=last
+                    console.log("ok pour rem");
             }
-    }
+    }}
     return stateObj
 
 }
@@ -149,8 +188,6 @@ const shuffle= deck=>{
     return deck;
 }
 function setCardsR(state=initialState, action){
-    console.log("in setCardsR");
-    console.log(state);
     let deck=[{color:'blue',pos: '', sex: 'M', numb:1},
               {color:'green',pos: '', sex: 'F', numb:1},
               {color:'yellow',pos: '', sex: 'F', numb:1},
@@ -184,11 +221,8 @@ function setCardsR(state=initialState, action){
 
 function blitzReducer(state=initialState, action) {
     switch (action.type) {
-        case MOVE:
-            return moveR(state, action)
-            break;
-        /*case MOVE_3_CARDS:
-            return move3CardsR(state, action)*/
+        case CLICK:
+            return clickedR(state, action)
             break;
         case INITIALIZE:
             return initialiseR()

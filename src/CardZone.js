@@ -16,18 +16,24 @@ function CardZone({
     gridStyle,
     pub,
     upperCards,
-}){ console.log("in cardzone")
-    console.log(upperCards);
+}){
+    let a=JSON.parse(JSON.stringify(upperCards))
+    a[0].pos='rem'
+    a[1].pos='ls'
+    a[2].pos='ms'
+    a[3].pos='rs'
+    a[4].pos='b'
     return (
         <div style={gridStyle}>
             <div style={cardZoneStyle} >
-                {upperCards.map((card, i) => (
+                {a.map((card, i) => (
                     <CardContainer
                         key={`card-zone-card-container-${i}`}
                         pubPile={pub}
                         color={card.color}
                         sex={card.sex}
                         numb={card.numb}
+                        pos={card.pos}
                     />
                 ))}
                 {/*<CardContainer pubPile={pub} color={upperCards[0].color} sex={upperCards[0].sex} numb={upperCards[0].numb} />*/}
