@@ -30,6 +30,7 @@ function BoardZone ({
                                     color={upperCards[index].color}
                                     sex={upperCards[index].sex}
                                     numb={upperCards[index].numb}
+                                    index={index}
                                     pos='m'
                                 />
                             );

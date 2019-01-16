@@ -12,6 +12,7 @@ function CardContainer({
     numb,
     pos,
     whenClicked,
+    index,
 }) {
        const verticalMargin=10 + 40 * Math.random()
         return (
@@ -22,7 +23,7 @@ function CardContainer({
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-        whenClicked: () => dispatch(cardClick({color: ownProps.color ,pos: ownProps.pos, sex: ownProps.sex, numb:ownProps.numb}))
+        whenClicked: () => dispatch(cardClick({color: ownProps.color ,pos: ownProps.pos, sex: ownProps.sex, numb:ownProps.numb, index:ownProps.index}))
 })
 
 CardContainer = connect(null, mapDispatchToProps)(CardContainer)

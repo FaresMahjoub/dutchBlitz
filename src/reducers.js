@@ -9,20 +9,25 @@ import {
 } from './actions'
 import {cardMove} from './actions'
 
-const cardsInMiddle = Array(16).fill({color:'',pos: 'm', sex: '', numb:0, index:0 });
-cardsInMiddle[1].index=1
-cardsInMiddle[2].index=2
-cardsInMiddle[3].index=3
-cardsInMiddle[4].index=4
-cardsInMiddle[5].index=5
-cardsInMiddle[6].index=6
-cardsInMiddle[7].index=7
-cardsInMiddle[8].index=8
-cardsInMiddle[9].index=9
-cardsInMiddle[10].index=10
-cardsInMiddle[11].index=11
-cardsInMiddle[12].index=12
-cardsInMiddle[13].index=13
+const cardsInMiddle = Array(16)
+for (let i=0;i<16;i++){
+    cardsInMiddle[i]={color:'',pos: 'm', sex: '', numb:0, index:i };
+};
+/*cardsInMiddle[2]={color:'',pos: 'm', sex: '', numb:0, index:2 };
+cardsInMiddle[3]={color:'',pos: 'm', sex: '', numb:0, index:3 };
+cardsInMiddle[4]={color:'',pos: 'm', sex: '', numb:0, index:4 };
+cardsInMiddle[5]={color:'',pos: 'm', sex: '', numb:0, index:5 };
+cardsInMiddle[6]={color:'',pos: 'm', sex: '', numb:0, index:6 };
+cardsInMiddle[7]={color:'',pos: 'm', sex: '', numb:0, index:6 };
+cardsInMiddle[8]={color:'',pos: 'm', sex: '', numb:0, index:6 };
+cardsInMiddle[9]={color:'',pos: 'm', sex: '', numb:0, index:6 };
+cardsInMiddle[10]={color:'',pos: 'm', sex: '', numb:0, index:6 };
+cardsInMiddle[6]={color:'',pos: 'm', sex: '', numb:0, index:6 };
+cardsInMiddle[6]={color:'',pos: 'm', sex: '', numb:0, index:6 };
+cardsInMiddle[6]={color:'',pos: 'm', sex: '', numb:0, index:6 };
+cardsInMiddle[6]={color:'',pos: 'm', sex: '', numb:0, index:6 };
+cardsInMiddle[6]={color:'',pos: 'm', sex: '', numb:0, index:6 };*/
+
 
 console.log("total");
 console.log(cardsInMiddle);
@@ -36,7 +41,7 @@ export const initialState={
         middleSexistStack: new Array(1).fill({color:'',pos: 'ms', sex: '', numb:0}),
         rightSexistStack: new Array(1).fill({color:'',pos: 'rs', sex: '', numb:0}),
 		// todo discuss this  --  perhaps it would be cleaner if the logic had an extra pile, to keep the cards in the hand, which are transfered to this one when you 'MOVE_3_CARDS'
-        remainingStack: new Array(27).fill({color:'',pos: 'rems', sex: '', numb:0}),
+        remainingStack: new Array(27).fill({color:'',pos: 'rem', sex: '', numb:0}),
     },
     player2Data:{
         nbCardsInMiddle: 0,
@@ -44,7 +49,7 @@ export const initialState={
         leftSexistStack: new Array(1).fill({color:'',pos: 'ls', sex: '', numb:0}),
         middleSexistStack: new Array(1).fill({color:'',pos: 'ms', sex: '', numb:0}),
         rightSexistStack: new Array(1).fill({color:'',pos: 'rs', sex: '', numb:0}),
-        remainingStack: new Array(27).fill({color:'',pos: 'rems', sex: '', numb:0}),    },
+        remainingStack: new Array(27).fill({color:'',pos: 'rem', sex: '', numb:0}),    },
     player3Data:{
         clicked:false,
         lastClicked:{color:'',pos: '', sex: '', numb:0, index:0},
@@ -53,14 +58,14 @@ export const initialState={
         leftSexistStack: new Array(1).fill({color:'',pos: 'ls', sex: '', numb:0}),
         middleSexistStack: new Array(1).fill({color:'',pos: 'ms', sex: '', numb:0}),
         rightSexistStack: new Array(1).fill({color:'',pos: 'rs', sex: '', numb:0}),
-		remainingStack: new Array(27).fill({color:'',pos: 'rems', sex: '', numb:0}),    } ,
+		remainingStack: new Array(27).fill({color:'',pos: 'rem', sex: '', numb:0}),    } ,
     player4Data:{
         nbCardsInMiddle: 0,
         blitzStack: new Array(10).fill({color:'',pos: 'b', sex: '', numb:0}),
         leftSexistStack: new Array(1).fill({color:'',pos: 'ls', sex: '', numb:0}),
         middleSexistStack: new Array(1).fill({color:'',pos: 'ms', sex: '', numb:0}),
         rightSexistStack: new Array(1).fill({color:'',pos: 'rs', sex: '', numb:0}),
-        remainingStack: new Array(27).fill({color:'',pos: 'rems', sex: '', numb:0}),    }
+        remainingStack: new Array(27).fill({color:'',pos: 'rem', sex: '', numb:0}),    }
 }
 
 function initialiseR(){
@@ -92,62 +97,78 @@ function clickedR(state=initialState, action){
 }
 
 function moveR(state=initialState, click1,click2){
-    console.log(state);
     let stateObj=JSON.parse(JSON.stringify(state));
     console.log("action.click1");
     console.log(click1);
+    console.log("action.click2");
+    console.log(click2);
     if ((click2.color === click1.color && click2.numb === click1.numb-1)
         || (click1.numb===1 && click2.numb==0)
         || (click2.sex  !== click1.sex && click2.numb===click1.numb-1)
-        || (click1.pos===click2.pos && click1.pos==='rem')){
-        console.log("ok pour if");
+        || (click1.pos===click2.pos && click1.pos==='rem')
+        || (click1.pos==='b' && ['ls','ms','rs'].includes(click2.pos))){
+        console.log("rentre dans le if");
     switch (click1.pos){
         case 'b':
             switch (click2.pos){
                 case 'm':
                 	// the cards in cardInMiddle are only the top of the pile. The index prop is the number of the pile on the board
                     // (specific for the piles in the middle) thus needs to be added to cards coming to the middle
-                    stateObj.cardsInMiddle.splice(click2.index,1,{...click1, ...{index: click2.index}})
-                    stateObj.player3Data.nbCardsInMiddle=state.player3Data.nbCardsInMiddle+1
-                    stateObj.player3Data.blitzStack.pop()
+                    stateObj.cardsInMiddle.splice(click2.index,1,{...click1, ...{pos:'m',index: click2.index}});
+                    stateObj.player3Data.nbCardsInMiddle=state.player3Data.nbCardsInMiddle+1;
+                    stateObj.player3Data.blitzStack.pop();
                     break;
                 case 'ls':
-                    stateObj.player3Data.leftSexistStack.push(click1)
-                    stateObj.player3Data.blitzStack.pop()
+                    console.log("oui pour le case");
+                    stateObj.player3Data.leftSexistStack.push({...click1, ...{pos:'ls'}});
+                    stateObj.player3Data.blitzStack.pop();
                     break;
                 case 'ms':
-                    stateObj.player3Data.middleSexistStack.push(click1)
-                    stateObj.player3Data.blitzStack.pop()
+                    console.log("oui pour le case");
+                    stateObj.player3Data.middleSexistStack.push({...click1, ...{pos:'ms'}});
+                    stateObj.player3Data.blitzStack.pop();
                     break;
                 case 'rs':
-                    stateObj.player3Data.rightSexistStack.push(click1)
-                    stateObj.player3Data.blitzStack.pop()
+                    console.log("oui pour le case");
+                    stateObj.player3Data.rightSexistStack.push({...click1, ...{pos:'rs'}});
+                    stateObj.player3Data.blitzStack.pop();
                     break;
+                default:
+                    console.log("rentre dans default");
             }
              break;
         case 'ls':
             // card coming to the middle. The cards in cardInMiddle are only the top of the pile. The index prop is the number of the pile on the board
             // (specific for tthe piles in the middle) thus needs to be added to cards coming to the middle
-			stateObj.cardsInMiddle.splice(click2.index,1,{...click1, ...{index: click2.index}})
+            console.log('index');
+            console.log(click2.index);
+            console.log('item');
+            console.log({...click1, ...{index: click2.index}});
+			stateObj.cardsInMiddle.splice(click2.index,1,{...click1, ...{pos:'m',index: click2.index}})
             stateObj.player3Data.nbCardsInMiddle=state.player3Data.nbCardsInMiddle+1
             stateObj.player3Data.leftSexistStack.pop()
-            stateObj.player3Data.leftSexistStack.push({color:'',pos: 'ls', sex: '', numb:0})
             break;
         case 'ms':
             // card coming to the middle. The cards in cardInMiddle are only the top of the pile. The index prop is the number of the pile on the board
             // (specific for the piles in the middle) thus needs to be added to cards coming to the middle
-			stateObj.cardsInMiddle.splice(click2.index,1,{...click1, ...{index: click2.index}})
+            console.log('index');
+            console.log(click2.index);
+            console.log('item');
+            console.log({...click1, ...{index: click2.index}});
+            stateObj.cardsInMiddle.splice(click2.index,1,{...click1, ...{pos:'m',index: click2.index}})
             stateObj.player3Data.nbCardsInMiddle=state.player3Data.nbCardsInMiddle+1
             stateObj.player3Data.middleSexistStack.pop()
-            stateObj.player3Data.middleSexistStack.push({color:'',pos: 'ms', sex: '', numb:0})
             break;
         case 'rs':
             // card coming to the middle. The cards in cardInMiddle are only the top of the pile. The index prop is the number of the pile on the board
             // (specific for the piles in the middle) thus needs to be added to cards coming to the middle
-			stateObj.cardsInMiddle.splice(click2.index,1,{...click1, ...{index: click2.index}})
+            console.log('index');
+            console.log(click2.index);
+            console.log('item');
+            console.log({...click1, ...{index: click2.index}});
+            stateObj.cardsInMiddle.splice(click2.index,1,{...click1, ...{pos:'m',index: click2.index}})
             stateObj.player3Data.nbCardsInMiddle=state.player3Data.nbCardsInMiddle+1
             stateObj.player3Data.rightSexistStack.pop()
-            stateObj.player3Data.rightSexistStack.push({color:'',pos: 'rs', sex: '', numb:0})
             break;
         case 'rem':
             switch (click2.pos){
@@ -205,17 +226,17 @@ function setCardsR(state=initialState, action){
     let stateObj=JSON.parse(JSON.stringify(state))
 
     // todo discuss -- couldn't you just slice the deck?
-    stateObj.player3Data.leftSexistStack[0]=deck[deck.length-1]
+    stateObj.player3Data.leftSexistStack.push({...deck[deck.length-1],...{pos:'ls'}})
     deck.pop()
-    stateObj.player3Data.middleSexistStack[0]=deck[deck.length-1]
+    stateObj.player3Data.middleSexistStack.push({...deck[deck.length-1],...{pos:'ms'}})
     deck.pop()
-    stateObj.player3Data.rightSexistStack[0]=deck[deck.length-1]
+    stateObj.player3Data.rightSexistStack.push({...deck[deck.length-1],...{pos:'rs'}})
     deck.pop()
     for (let i=0;i<10;i++){
-        stateObj.player3Data.blitzStack[i]=deck[deck.length-1]
+        stateObj.player3Data.blitzStack[i]={...deck[deck.length-1],...{pos:'b'}}
         deck.pop()
     }
-    stateObj.player3Data.remainingStack=Object.assign([],deck)
+    stateObj.player3Data.remainingStack=Object.assign([],deck.map(x => Object.assign(x,{pos:'rem'})))
     return stateObj
 }
 
