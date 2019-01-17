@@ -31,7 +31,7 @@ class App2 extends React.Component{
               name="Thomas"
               playerNumber={1}
               upperPlayerCards={playerCards}
-              bot={true}
+              bot={false}
               gridStyle={{
                 gridColumn:" 2 / 3",
                 gridRow:" 1 / 2",
@@ -41,7 +41,7 @@ class App2 extends React.Component{
               name="Guillaume"
               playerNumber={2}
               upperPlayerCards={playerCards}
-              bot={true}
+              bot={false}
               gridStyle={{
                 gridColumn:" 3 / 4",
                 gridRow:" 1 / 2",
@@ -69,7 +69,7 @@ class App2 extends React.Component{
               name="JB"
               playerNumber={4}
               upperPlayerCards={playerCards}
-              bot={true}
+              bot={false}
               gridStyle={{
                 gridColumn:" 3 / 4",
                 gridRow:" 3 / 4",
