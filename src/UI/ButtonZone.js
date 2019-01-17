@@ -20,7 +20,7 @@ function ButtonZone({
             <div style={buttonZoneStyle}>
                 <button type="Button" onClick={onResetClick}>Reset</button>
                 <button type="Button" onClick={onGiveCardsClick}>Give cards</button>
-                <button type="Button" /*onClick={}*/>Play/Pause</button>
+                <button type="Button" onClick={() => console.log('click')} onDoubleClick={() => console.log('db click')}>Play/Pause</button>
             </div>
         </div>
 

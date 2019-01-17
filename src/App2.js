@@ -12,6 +12,8 @@ const appStyle={
   gridTemplateRows: "1fr 2fr 1fr",
   gridTemplateColumns:"1fr 3fr 3fr",
 };
+
+// todo erase dead code
 const midCards= Array(16).fill({color: 'blue', sex:'F', numb:0,})
 const playerCards =  Array(5).fill({color: 'blue', sex:'F', numb:0,})
 class App2 extends React.Component{

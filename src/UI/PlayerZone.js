@@ -21,7 +21,10 @@ function PlayerZone({
         return (
             <div style={gridStyle}>
                 <div style={playerZoneStyle}>
-					{/* todo correct indentation here */}
+					{/*
+					    1) todo correct indentation here
+					    2) the NameZone component is so simple (so far) that it could be just implemented right here
+                    */}
 					<NameZone name={name}
                               bot={bot}
                               style={{
