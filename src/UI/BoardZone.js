@@ -2,11 +2,14 @@ import React from 'react';
 import {CardZone} from './CardZone.js';
 import CardContainer from "./CardContainer";
 import {connect} from "react-redux";
+import Paper from '@material-ui/core/Paper';
+
 
 
 const boardZoneStyle={
         display: "flex",
         flexWrap: "wrap",
+        justifyContent: "center",
 }
 
 function BoardZone ({
@@ -19,7 +22,7 @@ function BoardZone ({
         let a=Array(pileNumb).fill(0)
         const cards=
             <div style={gridStyle}>
-                    <div style={boardZoneStyle} >
+                    <Paper style={boardZoneStyle} >
                             { a.map((elt,index)=>{
                             return (
                                 <CardContainer
@@ -33,7 +36,7 @@ function BoardZone ({
                                 />
                             );
                     })}
-                    </div>
+                    </Paper>
             </div>
         return cards
 

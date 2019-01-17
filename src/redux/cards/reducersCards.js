@@ -198,10 +198,10 @@ function setCardsR(state=initialState, action){
             {color:'red',pos: '', sex: 'M', numb:1, playerNumb: 0,},
         ];
         for (let i=2;i<11;i++){
-            deck.push({color:'blue', pos: '', sex: i%2===0 ? 'F':'M',numb: i, playerNumb: 0,});
-            deck.push({color:'green',pos: '', sex: i%2===0 ? 'M':'F', numb: i, playerNumb: 0,});
-            deck.push({color:'yellow',pos: '', sex: i%2===0 ? 'M':'F', numb:i, playerNumb: 0,});
-            deck.push({color:'red',pos: '', sex: i%2===0 ? 'F':'M', numb:i, playerNumb: 0,});
+            deck.push({color:'blue', pos: '', sex: 'M',numb: i, playerNumb: 0,});
+            deck.push({color:'green',pos: '', sex: 'F', numb: i, playerNumb: 0,});
+            deck.push({color:'yellow',pos: '', sex: 'F', numb:i, playerNumb: 0,});
+            deck.push({color:'red',pos: '', sex: 'M', numb:i, playerNumb: 0,});
         }
         deck=shuffle(deck);
         const playerId = `player${i}Data`;

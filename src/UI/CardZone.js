@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 const cardZoneStyle={
     display: "flex",
     flexWrap: "wrap",
+    justifyContent: "center",
 }
 
 function CardZone({

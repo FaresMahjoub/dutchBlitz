@@ -3,6 +3,8 @@ import CardZone from './CardZone';
 import NameZone from "./NameZone";
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
+import Paper from '@material-ui/core/Paper';
+
 
 const playerZoneStyle={
     display: "grid",
@@ -20,7 +22,7 @@ function PlayerZone({
 }) {
         return (
             <div style={gridStyle}>
-                <div style={playerZoneStyle}>
+                <Paper style={playerZoneStyle}>
 					{/* todo correct indentation here */}
 					<NameZone name={name}
                               bot={bot}
@@ -39,7 +41,7 @@ function PlayerZone({
                             gridRow: "2 / 3",
                         }}
                     />
-                </div>
+                </Paper>
             </div>)
 
 
