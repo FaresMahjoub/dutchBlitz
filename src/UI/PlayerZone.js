@@ -61,9 +61,10 @@ const setPlayerCards= (playercards) =>{
     ]
     return cards
 }
+
 const mapStateToProps = (state, ownProps) => {
     return ({
-        upperPlayerCards: setPlayerCards(state.player3Data)
+        upperPlayerCards: setPlayerCards(state[`player${ownProps.playerNumber}Data`])
     })
 }
 
