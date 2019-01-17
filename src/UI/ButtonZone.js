@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {initialise, setCards} from "../redux/cards/actionsCards";
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Drawer from '@material-ui/core/Drawer';
+
 
 
 function ButtonZone({
@@ -16,13 +20,18 @@ function ButtonZone({
         alignContent: "space-between",
     }
     return(
-        <div style={gridStyle}>
+        <Drawer
+            style={gridStyle}
+            anchor='left'
+            open={true}
+            variant='persistent'
+        >
             <div style={buttonZoneStyle}>
-                <button type="Button" onClick={onResetClick}>Reset</button>
-                <button type="Button" onClick={onGiveCardsClick}>Give cards</button>
-                <button type="Button" onClick={() => console.log('click')} onDoubleClick={() => console.log('db click')}>Play/Pause</button>
+                <Button variant="contained" onClick={onResetClick}>Reset</Button>
+                <Button variant="contained" onClick={onGiveCardsClick}>Give cards</Button>
+                <Button variant="contained" /*onClick={}*/>Play/Pause</Button>
             </div>
-        </div>
+        </Drawer>
 
     )
 

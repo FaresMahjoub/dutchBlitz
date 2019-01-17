@@ -9,7 +9,7 @@ import PlayerZone from './UI/PlayerZone.js';
 
 const appStyle={
   display: "grid",
-  gridTemplateRows: "1fr 2fr 1fr",
+  gridTemplateRows: "150px 200px 150px",
   gridTemplateColumns:"1fr 3fr 3fr",
 };
 
@@ -33,20 +33,23 @@ class App2 extends React.Component{
               name="Thomas"
               playerNumber={1}
               upperPlayerCards={playerCards}
-              bot={false}
+              bot={true}
               gridStyle={{
                 gridColumn:" 2 / 3",
                 gridRow:" 1 / 2",
+                alignSelf: "center",
               }}
           />
           <PlayerZone
               name="Guillaume"
               playerNumber={2}
               upperPlayerCards={playerCards}
-              bot={false}
+              bot={true}
               gridStyle={{
                 gridColumn:" 3 / 4",
                 gridRow:" 1 / 2",
+                alignSelf: "center",
+
               }}
           />
           <BoardZone
@@ -65,16 +68,18 @@ class App2 extends React.Component{
               gridStyle={{
                 gridColumn:" 2 / 3",
                 gridRow:" 3 / 4",
+                alignSelf: "center",
               }}
           />
           <PlayerZone
               name="JB"
               playerNumber={4}
               upperPlayerCards={playerCards}
-              bot={false}
+              bot={true}
               gridStyle={{
                 gridColumn:" 3 / 4",
                 gridRow:" 3 / 4",
+                alignSelf: "center",
               }}
           />
         </div>   )
