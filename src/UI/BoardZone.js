@@ -1,9 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import * as serviceWorker from './serviceWorker';
 import {CardZone} from './CardZone.js';
 import CardContainer from "./CardContainer";
+import {connect} from "react-redux";
 
 
 const boardZoneStyle={
@@ -41,7 +39,10 @@ function BoardZone ({
 
 }
 
-export default BoardZone
+const mapStateToProps = state => ({
+    upperCards: state.cardsInMiddle
+});
 
+BoardZone = connect(mapStateToProps, null)(BoardZone);
 
-
+export default BoardZone;

@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
-import store from './store'
-import ContainerButtonZone from './containerButtonZone.js';
-import ContainerBoardZone from './containerBoardZone.js'
-import PlayerZone from './PlayerZone.js';
+import store from './redux/store'
+import ButtonZone from './UI/ButtonZone.js';
+import BoardZone from './UI/BoardZone.js'
+import PlayerZone from './UI/PlayerZone.js';
 
 const appStyle={
   display: "grid",
@@ -18,7 +18,7 @@ class App2 extends React.Component{
   render(){
     return   (
         <div style={appStyle}>
-          <ContainerButtonZone
+          <ButtonZone
               gridStyle={{
                 gridColumnStart: "1",
                 gridColumnEnd: "2",
@@ -29,6 +29,7 @@ class App2 extends React.Component{
           />
           <PlayerZone
               name="Thomas"
+              playerNumber={1}
               upperPlayerCards={playerCards}
               bot={true}
               gridStyle={{
@@ -38,6 +39,7 @@ class App2 extends React.Component{
           />
           <PlayerZone
               name="Guillaume"
+              playerNumber={2}
               upperPlayerCards={playerCards}
               bot={true}
               gridStyle={{
@@ -45,7 +47,7 @@ class App2 extends React.Component{
                 gridRow:" 1 / 2",
               }}
           />
-          <ContainerBoardZone
+          <BoardZone
               pileNumb={16}
               pub={true}
               gridStyle={{
@@ -57,6 +59,7 @@ class App2 extends React.Component{
           <PlayerZone
               name="My Name"
               bot={false}
+              playerNumber={3}
               gridStyle={{
                 gridColumn:" 2 / 3",
                 gridRow:" 3 / 4",
@@ -64,6 +67,7 @@ class App2 extends React.Component{
           />
           <PlayerZone
               name="JB"
+              playerNumber={4}
               upperPlayerCards={playerCards}
               bot={true}
               gridStyle={{

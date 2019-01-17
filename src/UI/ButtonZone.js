@@ -1,8 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import * as serviceWorker from './serviceWorker';
 import PropTypes from 'prop-types';
+import {connect} from "react-redux";
+import {initialise, setCards} from "../redux/cards/actionsCards";
 
 
 function ButtonZone({
@@ -33,4 +32,11 @@ ButtonZone.porpTypes={
     gridStyle: PropTypes.object.isRequired,
 }
 
-export default ButtonZone
+const mapDispatchToProps = dispatch => ({
+    onResetClick: () => dispatch(initialise()),
+    onGiveCardsClick: () => dispatch(setCards()),
+});
+
+ButtonZone = connect(null, mapDispatchToProps)(ButtonZone);
+
+export default ButtonZone;

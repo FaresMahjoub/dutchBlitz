@@ -1,5 +1,4 @@
 import React from 'react';
-import './index.css';
 import CardZone from './CardZone';
 import NameZone from "./NameZone";
 import PropTypes from 'prop-types';
@@ -17,6 +16,7 @@ function PlayerZone({
     name,
     bot,
     upperPlayerCards,
+    playerNumber,
 }) {
         return (
             <div style={gridStyle}>
@@ -32,6 +32,7 @@ function PlayerZone({
                     <CardZone
                         pub={!bot}
                         pileNumb={5}
+                        playerNumber={playerNumber}
                         upperCards={upperPlayerCards}
                         gridStyle={{
                             gridColumn: "1 / 2",

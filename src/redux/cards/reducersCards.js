@@ -6,8 +6,8 @@ import {
     SET_CARDS,
     INITIALIZE,
     CLICK,
-} from './actions'
-import {cardMove} from './actions'
+} from './actionsCards'
+import {cardMove} from './actionsCards'
 
 const cardsInMiddle = Array(16)
 for (let i=0;i<16;i++){
@@ -96,7 +96,7 @@ function clickedR(state=initialState, action){
     }
 }
 
-function moveR(state=initialState, click1,click2){
+function moveR(state=initialState, click1, click2){
     let stateObj=JSON.parse(JSON.stringify(state));
     console.log("action.click1");
     console.log(click1);

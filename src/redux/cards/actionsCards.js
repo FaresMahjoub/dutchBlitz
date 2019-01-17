@@ -1,7 +1,6 @@
 
 export const MOVE= "card_move"
 export const MOVE_3_CARDS= "move_3_cards"
-export const PLAY_PAUSE= "playPause"
 export const SET_CARDS= "setCards"
 export const INITIALIZE="initialise"
 export const CLICK="click"
@@ -32,6 +31,3 @@ export function setCards(){
     return ({type: SET_CARDS})
 }
 
-export function playPause(){
-    return ({type: PLAY_PAUSE})
-}

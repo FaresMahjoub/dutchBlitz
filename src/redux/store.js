@@ -1,11 +1,11 @@
 import { createStore } from 'redux'
-import blitzReducer from './reducers'
-import initialState from './reducers.js'
+import blitzReducer from './cards/reducersCards'
+import initialState from './cards/reducersCards.js'
 import {
     initialise,
     move3Cards,
     setCards,
-} from './actions'
+} from './cards/actionsCards'
 
 const store = createStore(blitzReducer)
 

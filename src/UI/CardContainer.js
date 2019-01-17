@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {cardClick} from './actions'
+import {cardClick} from '../redux/cards/actionsCards'
 import {connect} from "react-redux";
 
 
@@ -13,6 +13,7 @@ function CardContainer({
     pos,
     whenClicked,
     index,
+    playerNumber,
 }) {
        const verticalMargin=10 + 40 * Math.random()
         return (
@@ -23,7 +24,7 @@ function CardContainer({
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-        whenClicked: () => dispatch(cardClick({color: ownProps.color ,pos: ownProps.pos, sex: ownProps.sex, numb:ownProps.numb, index:ownProps.index}))
+        whenClicked: () => dispatch(cardClick({color: ownProps.color ,pos: ownProps.pos, sex: ownProps.sex, numb:ownProps.numb, index:ownProps.index, playerNumber: ownProps.playerNumber,}))
 })
 
 CardContainer = connect(null, mapDispatchToProps)(CardContainer)

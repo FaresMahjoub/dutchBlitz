@@ -1,7 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import * as serviceWorker from './serviceWorker';
 import CardContainer from './CardContainer.js';
 import PropTypes from 'prop-types';
 
@@ -16,6 +13,7 @@ function CardZone({
     gridStyle,
     pub,
     upperCards,
+    playerNumber,
 }){
     let a=JSON.parse(JSON.stringify(upperCards))
     a[0].pos='rem'
@@ -34,6 +32,7 @@ function CardZone({
                         sex={card.sex}
                         numb={card.numb}
                         pos={card.pos}
+                        playerNumber={playerNumber}
                     />
                 ))}
                 {/*<CardContainer pubPile={pub} color={upperCards[0].color} sex={upperCards[0].sex} numb={upperCards[0].numb} />*/}
