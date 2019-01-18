@@ -1,13 +1,18 @@
-import { createStore } from 'redux'
-import blitzReducer from './cards/reducersCards'
-import initialState from './cards/reducersCards.js'
+import {combineReducers, createStore} from 'redux'
+import cardsReducer from './cards/cardsReducers'
+import initialState from './cards/cardsReducers.js'
+import {playingReducer} from './playing'
 import {
     initialise,
     move3Cards,
     setCards,
-} from './cards/actionsCards'
+} from './cards/cardsActions'
 
-const store = createStore(blitzReducer)
+const store = createStore(combineReducers({
+    cards: cardsReducer,
+    playing: playingReducer,
+
+}))
 
 export default store
 

@@ -15,6 +15,7 @@ function CardZone({
     pub,
     upperCards,
     playerNumber,
+    pause,
 }){
     let a=JSON.parse(JSON.stringify(upperCards))
     a[0].pos='rem'
@@ -29,6 +30,7 @@ function CardZone({
                     <CardContainer
                         key={`card-zone-card-container-${i}`}
                         pubPile={pub}
+                        pause={pause}
                         color={card.color}
                         sex={card.sex}
                         numb={card.numb}

@@ -21,4 +21,3 @@ export function move3Cards(){
 export function setCards(){
     return ({type: SET_CARDS})
 }
-

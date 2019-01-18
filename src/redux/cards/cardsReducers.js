@@ -1,12 +1,9 @@
 
 import {
-    MOVE,
-    MOVE_3_CARDS,
-    playpause,
     SET_CARDS,
     INITIALIZE,
     CLICK,
-} from './actionsCards'
+} from './cardsActions'
 
 const cardsInMiddle = Array(16);
 for (let i=0;i<16;i++){
@@ -16,7 +13,6 @@ for (let i=0;i<16;i++){
 export const initialState={
     cardsInMiddle: cardsInMiddle,
     playerClicking:0,
-    playing: false,
     player1Data:{
         clicked:false,
         lastClicked:{color:'',pos: '', sex: '', numb:0, index:0},
@@ -60,44 +56,33 @@ function initialiseR(){
     return initialState
 }
 
-function clickedR(state=initialState, action){
-    let stateObj=JSON.parse(JSON.stringify(state));
-    //console.log(stateObj);
-    //console.log(action);
+function clickedR(state=initialState, action) {
+    let stateObj = JSON.parse(JSON.stringify(state));
     let playerId;
-    console.log(action);
-    if (action.click1.playerNumber  && action.click1.playerNumber!==0){
-        playerId=`player${action.click1.playerNumber}Data`;
-        stateObj.playerClicking=action.click1.playerNumber;
-        console.log("ok for if");
+    if (action.click1.playerNumber && action.click1.playerNumber !== 0) {
+        playerId = `player${action.click1.playerNumber}Data`;
+        stateObj.playerClicking = action.click1.playerNumber;
+    } else {
+        playerId = `player${stateObj.playerClicking}Data`;
     }
-    else {
-        console.log("ok for else");
-        playerId=`player${stateObj.playerClicking}Data`;
+    if (['player1Data', 'player2Data', 'player3Data', 'player4Data',].includes(playerId)){
+            if (stateObj[playerId].clicked === false) {
+                stateObj[playerId].clicked = true;
+                stateObj[playerId].lastClicked = action.click1;
+                return stateObj
+            } else {
+                let click2 = action.click1;
+                let click1 = stateObj[playerId].lastClicked;
+                stateObj = moveR(stateObj, click1, click2);
+                stateObj[playerId].lastClicked = click2;
+                stateObj[playerId].clicked = false;
+                return stateObj
+            }
     }
-    console.log(playerId);
-    if (stateObj[playerId].clicked===false){
-        stateObj[playerId].clicked=true;
-        stateObj[playerId].lastClicked=action.click1;
-        console.log("in if");
-        console.log(stateObj);
-        return stateObj
-    }
-    else{
-        console.log("in else");
-        console.log(stateObj);
-        let click2=action.click1;
-        let click1=stateObj[playerId].lastClicked;
-        stateObj=moveR(stateObj,click1,click2);
-        stateObj[playerId].lastClicked=click2;
-        stateObj[playerId].clicked=false;
-        return stateObj
-    }
-}
 
+}
+//const validMovements=
 function moveR(state=initialState, click1, click2){
-    console.log(click1);
-    console.log(click2);
     let stateObj=JSON.parse(JSON.stringify(state));
     if ((click2.color === click1.color && click2.numb === click1.numb-1)
         || (click1.numb===1 && click2.numb===0)
@@ -221,21 +206,21 @@ function setCardsR(state=initialState, action){
     return stateObj
 }
 
-function blitzReducer(state=initialState, action) {
+function cardsReducer(state=initialState, action) {
     switch (action.type) {
         case CLICK:
             return clickedR(state, action)
-            break;
+
         case INITIALIZE:
             return initialiseR()
-            break;
+
         case SET_CARDS:
-            return setCardsR(state, action)
-            break;
+            return setCardsR(initialiseR(), action)
+
         default:
-            return initialState
+            return state
     }
 }
 
-export default blitzReducer
+export default cardsReducer
 
