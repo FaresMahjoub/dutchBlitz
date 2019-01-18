@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {cardClick} from '../redux/cards/actionsCards'
+import {cardClick} from '../redux/cards/cardsActions'
 import {connect} from "react-redux";
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles'
@@ -39,6 +39,7 @@ function CardContainer({
     index,
     playerNumber,
     classes,
+    pause,
 
 }) {
     const verticalMargin=10 + 40 * Math.random();
@@ -74,7 +75,7 @@ function CardContainer({
                 variant="contained"
                 classes={buttonClasses}
                 onClick={whenClicked}
-                disabled={!pubPile}
+                disabled={!pubPile || pause}
             >
                 <h2 className={textClassName}>
                     {sex === 'M' && <MaleIcon/>}
@@ -139,9 +140,9 @@ CardContainer = connect(null, mapDispatchToProps)(CardContainer)
 export default CardContainer
 
 CardContainer.propTypes={
-    color: PropTypes.oneOf(['green','yellow','red','blue']).isRequired,
+    color: PropTypes.oneOf(['green','yellow','red','blue','']).isRequired,
     pubPile: PropTypes.bool.isRequired,
-    sex: PropTypes.oneOf(['F','M']).isRequired,
+    sex: PropTypes.oneOf(['F','M','']).isRequired,
     numb: PropTypes.number.isRequired,
 
 }

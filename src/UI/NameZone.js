@@ -20,7 +20,6 @@ class NameZone extends React.Component{
         };
 
     render(){
-        console.log(this.props);
         return (
             <div style={{display: "flex", justifyContent:"space-Evenly"}}>
                 {this.props.bot ? <Chip label={this.props.name}/>:

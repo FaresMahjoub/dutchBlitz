@@ -4,6 +4,8 @@ import NameZone from "./NameZone";
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 import Paper from '@material-ui/core/Paper';
+import {selectPlayerCards} from '../redux/cards/cardsSelectors.js'
+import {selectPlaying} from '../redux/playing'
 
 
 const playerZoneStyle={
@@ -19,6 +21,7 @@ function PlayerZone({
     bot,
     upperPlayerCards,
     playerNumber,
+    pause
 }) {
         return (
             <div style={gridStyle}>
@@ -33,6 +36,7 @@ function PlayerZone({
                               />
                     <CardZone
                         pub={!bot}
+                        pause={pause}
                         pileNumb={5}
                         playerNumber={playerNumber}
                         upperCards={upperPlayerCards}
@@ -53,20 +57,13 @@ PlayerZone.propTypes={
      bot: PropTypes.bool.isRequired,
 
 };
-const setPlayerCards= (playercards) =>{
-    let cards = [
-        playercards.remainingStack[playercards.remainingStack.length-1],
-        playercards.leftSexistStack[playercards.leftSexistStack.length-1],
-        playercards.middleSexistStack[playercards.middleSexistStack.length-1],
-        playercards.rightSexistStack[playercards.rightSexistStack.length-1],
-        playercards.blitzStack[playercards.blitzStack.length-1],
-    ]
-    return cards
-}
+
+
 
 const mapStateToProps = (state, ownProps) => {
     return ({
-        upperPlayerCards: setPlayerCards(state[`player${ownProps.playerNumber}Data`])
+        upperPlayerCards: selectPlayerCards(state, ownProps.playerNumber),
+        pause: !selectPlaying(state)
     })
 }
 
